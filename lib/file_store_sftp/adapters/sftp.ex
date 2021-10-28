@@ -274,6 +274,9 @@ defmodule FileStoreSftp.Adapters.Sftp do
              end) do
         Enum.map(files, &Path.join(prefix, to_string(&1)))
         {:ok, files}
+      else
+        {:error, :no_such_file} -> {:ok, []}
+        error -> error
       end
     end
 
